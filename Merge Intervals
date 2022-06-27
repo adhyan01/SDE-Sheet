@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) 
+    {
+        vector<vector<int>> t;
+        int n = intervals.size(); 
+        if(n==1)
+            return intervals;
+        sort(intervals.begin(), intervals.end());
+        vector<int> temp = intervals[0];
+        t.push_back(temp);
+        for(int i=1; i<n; i++)
+        {
+            if(t[t.size() - 1][1]>=intervals[i][0])
+                t[t.size() - 1][1]=max(intervals[i][1],t[t.size() - 1][1]);
+            else
+                t.push_back(intervals[i]);
+        }
+        return t;
+    }
+};
